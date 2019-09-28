@@ -4,15 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+gem 'rails', '~> 5.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '= 3.6.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -41,7 +37,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'rubocop', require: false
   gem 'awesome_print'
-  gem 'better_errors'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -52,7 +47,7 @@ end
 
 group :test do
   gem 'rspec-rails'
-  
+
   gem 'capybara-screenshot'
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
   gem 'fuubar'
@@ -77,3 +72,21 @@ gem 'rails_dt'
 gem 'faker'
 gem 'factory_bot_rails'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+
+gem "ni"
+gem "neewom"
+gem "peng"
+
+gem "devise"
+gem "rolify"
+gem "cocoon"
+gem "pundit"
+
+gem "simple_form"
+gem "hamlit"
+gem "kaminari"
+
+gem "sidekiq"
+gem "email_validator"
+gem "ancestry"
+gem "simple_resource_controller"

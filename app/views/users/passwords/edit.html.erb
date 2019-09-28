@@ -1,0 +1,40 @@
+<h2>Change your password</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.input :reset_password_token, as: :hidden %>
+  <%= f.full_error :reset_password_token %>
+  <div class="msg">
+    Please choose new password
+  </div>
+  <%= f.error_notification %>
+  <div class="input-group">
+      <span class="input-group-addon">
+          <i class="material-icons">lock</i>
+      </span>
+      <div class="form-line">
+          <%= f.input :password,
+                required: false,
+                label: false,
+                placeholder: "Password",
+                input_html: { autocomplete: "current-password", class: "form-control" } %>
+      </div>
+  </div>
+  <div class="input-group">
+      <span class="input-group-addon">
+          <i class="material-icons">lock</i>
+      </span>
+      <div class="form-line">
+          <%= f.input :password_confirmation,
+                required: false,
+                label: false,
+                placeholder: "Password confirmation",
+                input_html: { autocomplete: "current-password", class: "form-control" } %>
+      </div>
+  </div>
+
+  <%= f.button :submit, "RESET MY PASSWORD", class: "btn btn-block btn-lg bg-pink waves-effect" %>
+
+  <div class="row m-t-20 m-b--5 align-center">
+       <%= link_to "Log in", new_session_path(resource_name) %><br />
+  </div>
+<% end %>

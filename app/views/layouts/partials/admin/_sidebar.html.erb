@@ -1,0 +1,44 @@
+<aside id="leftsidebar" class="sidebar">
+    <!-- Menu -->
+    <div class="menu">
+        <ul class="list">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active">
+                <%= link_to root_path do %>
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                <% end %>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="material-icons">supervised_user_circle</i>
+                    <span>Users</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <%= link_to admin_users_path do %>
+                            <i class="material-icons">view_headline</i>
+                            <span>List</span>
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to admin_roles_path do %>
+                            <i class="material-icons">visibility</i>
+                            <span>Roles</span>
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to admin_groups_path do %>
+                            <i class="material-icons">group</i>
+                            <span>Groups</span>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- #Menu -->
+    <!-- Footer -->
+    <%= render 'layouts/partials/shared/sidebar_footer' %>
+    <!-- #Footer -->
+</aside>

@@ -1,0 +1,18 @@
+.card.card-about-me
+  .header
+    %h2
+      User Details
+      &nbsp;
+      = back_button admin_users_path
+  .body
+    %ul
+      %li
+        .title
+          Email
+        .content
+          = resource.email
+      %li
+        .title
+          Registration Date
+        .content
+          = resource.created_at

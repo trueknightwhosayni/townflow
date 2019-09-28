@@ -1,0 +1,17 @@
+- content_for :page_header do
+  %h2 Groups
+
+= admin_button 'New Group', new_admin_group_path, icon: 'group_add'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Title
+      %th Actions
+  %tbody
+    - collection.each do |group|
+      %tr
+        %td= group.title
+        %td
+          = edit_button edit_admin_group_path(group)
+          = delete_button admin_group_path(group)

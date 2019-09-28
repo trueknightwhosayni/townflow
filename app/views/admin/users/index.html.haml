@@ -1,0 +1,20 @@
+- content_for :page_header do
+  %h2 Users
+
+= admin_button 'New User', new_admin_user_path, icon: 'person_add'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Email
+      %th Actions
+  %tbody
+    - collection.each do |user|
+      %tr
+        %td= user.email
+        %td
+          = show_button admin_user_path(user)
+          = edit_button edit_admin_user_path(user)
+          = delete_button admin_user_path(user)
+
+= paginate collection

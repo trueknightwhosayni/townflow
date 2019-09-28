@@ -1,0 +1,17 @@
+- content_for :page_header do
+  %h2 Roles
+
+= admin_button 'New Role', new_admin_role_path, icon: 'playlist_add'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Actions
+  %tbody
+    - collection.each do |role|
+      %tr
+        %td= role.name
+        %td
+          = edit_button edit_admin_role_path(role)
+          = delete_button admin_role_path(role)

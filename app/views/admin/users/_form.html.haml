@@ -1,0 +1,7 @@
+= simple_form_for [:admin, resource] do |f|
+  = f.input :email
+  = f.input :password
+  = f.association :roles, as: :check_boxes, collection: Role.all, wrapper: :vertical_collection
+  = f.association :groups, as: :check_boxes, collection: Group.all, wrapper: :vertical_collection
+
+  = submit_button 'Save'
