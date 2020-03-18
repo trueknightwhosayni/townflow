@@ -10,10 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_190653) do
+ActiveRecord::Schema.define(version: 2019_09_28_221313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "at_collections", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "folder_id"
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_at_collections_on_user_id"
+  end
+
+  create_table "at_fields", force: :cascade do |t|
+    t.integer "collection_id", null: false
+    t.string "title", null: false
+    t.string "name", null: false
+    t.string "field_role", null: false
+    t.string "field_data_type", null: false
+    t.string "available_filters"
+    t.integer "relation_collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "at_folders", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "user_id"
+    t.string "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_at_folders_on_ancestry"
+    t.index ["user_id"], name: "index_at_folders_on_user_id"
+  end
+
+  create_table "at_forms", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "neewom_form_id", null: false
+    t.integer "collection_id", null: false
+    t.boolean "system", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "at_views", force: :cascade do |t|
+    t.integer "collection_id", null: false
+    t.string "title", null: false
+    t.integer "view_type", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "title"
@@ -68,4 +116,5 @@ ActiveRecord::Schema.define(version: 2019_09_24_190653) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
+
 end

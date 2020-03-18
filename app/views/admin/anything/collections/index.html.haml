@@ -1,0 +1,32 @@
+- content_for :page_header do
+  %h2
+    Entities
+    &nbsp;
+    = back_button back_path
+
+= admin_button 'New Folder', new_admin_anything_folder_path(folder_id: params[:folder_id]), icon: 'create_new_folder'
+= admin_button 'New Entity', new_admin_anything_collection_path(folder_id: params[:folder_id]), icon: 'device_hub'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Title
+      %th Actions
+  %tbody.folders-list
+    - @folders.each do |folder|
+      %tr
+        %td.folders-row
+          %i.material-icons folder
+          = link_to folder.title, admin_anything_collections_path(folder_id: folder.id)
+        %td
+          = edit_button edit_admin_anything_folder_path(folder)
+          = delete_button admin_anything_folder_path(folder)
+
+    - @collections.each do |collection|
+      %tr
+        %td.collections-row
+          %i.material-icons device_hub
+          = link_to collection.title, edit_admin_anything_collection_path(collection)
+        %td
+          = edit_button edit_admin_anything_collection_path(collection)
+          = delete_button admin_anything_collection_path(collection)
