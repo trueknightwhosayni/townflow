@@ -7,14 +7,6 @@ class Admin::Anything::CollectionsController < Admin::Anything::BaseCollectionsC
     @collections = current_folder.present? ? current_folder.collections : ::Anything::Collection.roots
   end
 
-  def update
-    update! do |format|
-      unless resource.errors.empty? # failure
-        format.html { redirect_to project_url(resource) }
-      end
-    end
-  end
-
   private
 
   def build_resource

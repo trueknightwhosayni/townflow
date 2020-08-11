@@ -1,0 +1,28 @@
+- content_for :page_header do
+  %h2
+    Edit Entity
+    &nbsp;
+    = back_button form_back_path
+
+
+%ul.nav.nav-tabs.tab-nav-right{:role => "tablist"}
+  %li.active{:role => "presentation"}
+    %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#main"} Main
+  %li{:role => "presentation"}
+    %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#forms"} Forms
+  %li{:role => "presentation"}
+    %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#views"} Views
+
+.tab-content
+  #main.tab-pane.active.in{:role => "tabpanel"}
+    = simple_form_for [:admin, resource] do |f|
+      = f.input :title
+
+      = submit_button 'Save'
+  #forms.tab-pane{:role => "tabpanel"}
+    %p Forms
+    %p Forms
+    %p Forms
+    %p Forms
+  #views.tab-pane{:role => "tabpanel"}
+    %b Views
