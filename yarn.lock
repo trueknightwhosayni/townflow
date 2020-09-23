@@ -3216,9 +3216,10 @@ jquery.repeatable@^0.4.1:
   resolved "https://registry.yarnpkg.com/jquery.repeatable/-/jquery.repeatable-0.4.1.tgz#28e6a53b8f4f9024c9bc21ad072a2117f63bd4f7"
   integrity sha512-lIgpAre3tCgza5odwYhsq6YunqNsfTnw5zbsUXKCz33C4i1w5Myx1Fxy21hllfzja6yaYZpEsxj9LdLHz/BO1A==
 
-jquery@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
+jquery@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.5.1"
