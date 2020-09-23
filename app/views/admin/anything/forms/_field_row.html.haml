@@ -1,0 +1,84 @@
+.card.field_row{id: "field-#{field_index}"}
+  .header.bg-light-blue
+    %h2 Field Data
+    %ul.header-dropdown.m-r--5
+      %li
+        = delete_button '#', class: 'remove-anything-form-field'
+  .body
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th{width: '20%'} Name
+          %th{width: '20%'} Label
+          %th{width: '10%'} Field type
+          %th{width: '10%'} Input
+          %th{width: '20%'} Collection
+          %th{width: '5%'} Virtual
+          %th{width: '15%'} Input Html
+      %tbody
+        %tr
+          %td
+            .input.string.anything_form_field_name
+              .form-group.form-float
+                .form-line
+                  = text_field_tag :name, field.name, name: 'form[fields][][name]', class: 'form-control string required'
+
+                - if field.errors[:name].any?
+                  %label.error= field.errors[:name].join(", ")
+
+          %td
+            .input.string.anything_form_field_label
+              .form-group.form-float
+                .form-line
+                  = text_field_tag :label, field.label, name: 'form[fields][][label]', class: 'form-control string required'
+
+                - if field.errors[:label].any?
+                  %label.error= field.errors[:label].join(", ")
+          %td
+            .input.string.anything_form_field_type
+              .form-group.form-float
+                .form-line
+                  = select_tag 'form[fields][][field_type]', options_for_select(Anything::Managers::Form.field_type_options, field.field_type), include_blank: true, class: 'form-control required field_type'
+
+                - if field.errors[:field_type].any?
+                  %label.error= field.errors[:field_type].join(", ")
+          %td.field_input
+            .input.string.anything_form_field_input
+              .form-group.form-float.field_input_placeholder
+                - if field.field_type.present?
+                  = render 'admin/anything/dynamic_form_components/field_input_impl', params: { field_type: field.field_type, input: field.input }
+
+                - if field.errors[:input].any?
+                  %label.error= field.errors[:input].join(", ")
+          %td.field_collection
+            .input.string.anything_form_field_collection
+              .form-group.form-float.field_collection_placeholder
+                - if field.field_type == Anything::Managers::Form::FIELD_TYPE_RELATION
+                  = render 'admin/anything/dynamic_form_components/field_collection_impl', params: { collection: field.collection }
+
+                - if field.errors[:collection].any?
+                  %label.error= field.errors[:collection].join(", ")
+          %td
+            %span.checkbox.form-check
+              = check_box_tag 'form[fields][][virtual]', field.virtual, field.virtual, class: 'form-control string required', id: "form_fields_virtual_#{field_index}"
+              %label{for: "form_fields_virtual_#{field_index}"}
+          %td
+            .input.string.anything_form_field_input_html
+              .form-group.form-float
+                .form-line
+                  = text_field_tag :input_html, field.input_html, name: 'form[fields][][input_html]', class: 'form-control string required'
+
+    %h3 Field Validations
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th{width: '20%'} Validation
+          %th{width: '55%'} Params
+          %th{width: '10%'} Allow blank
+          %th{width: '10%'} On
+          %th{width: '5%'}
+      %tbody.validations-container
+        - field.validations.each_with_index do |validation, index|
+          = render 'validation_row', validation: validation, field_index: field_index, validation_index: index
+
+    = add_button 'Add validation', '#', id: "add-validation-button-#{field_index}"

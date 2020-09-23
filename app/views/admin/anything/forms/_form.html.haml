@@ -1,0 +1,35 @@
+- method = form_object.persisted? ? "PATCH" : "POST"
+- url = form_object.persisted? ? admin_anything_collection_form_path(form_object.record_id) : admin_anything_collection_forms_path
+
+= form_with scope: :form, model: form_object, url: url, method: method do |f|
+  = hidden_field_tag :collection_id, params[:collection_id]
+
+  .input.string.anything_form_title
+    .form-group.form-float
+      .form-line
+        = f.text_field :title, class: 'form-control string required'
+        = f.label :title, class: 'form-label string required' do
+          %abbr{title: 'required'} *
+          %span Title
+
+      - if form_object.errors[:title].any?
+        %label.error= form_object.errors[:title].join(", ")
+
+  %h1 Fields
+  %script#field-row{type: "text/template"}= render 'field_row', field: Anything::FormFieldObject.new, field_index: '{?}'
+  %script#validation-row{type: "text/template"}= render 'validation_row', validation: Anything::FormFieldValidationObject.new, field_index: 'field_index_placeholder', validation_index: '{?}'
+  %script#form_helper_script{ data: { url: admin_anything_dynamic_form_components_path } }
+
+  .fields-container
+    - form_object.fields.each_with_index do |field, index|
+      = render 'field_row', field: field, field_index: index
+
+  .row
+    .col-12
+      = add_button 'Add field', '#', id: 'add-field-button'
+
+  .row
+    .col-12
+      %br
+      %hr
+      = submit_button 'Save'

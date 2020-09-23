@@ -1,0 +1,25 @@
+%tr.validation_row.field_row{id: "field-#{field_index}-validation-#{validation_index}"}
+  %td
+    .input.string.anything_form_field_name
+      .form-group.form-float
+        .form-line
+          = select_tag 'form[fields][][validations][][name]', options_for_select(Anything::Managers::FormFieldValidation.validations_list_options, validation.name), class: 'form-control required validation_type'
+
+        - if validation.errors[:name].any?
+          %label.error= validation.errors[:name].join(", ")
+  %td.validation_params_placeholder
+    - if validation.name == Anything::Managers::FormFieldValidation::VALIDATION_NUMERICALITY
+      = render 'admin/anything/dynamic_form_components/validation_numericality_impl', params: { validation: validation.name, validation_id: validation_index, only_integer: validation.params[:only_integer], greater_than: validation.params[:greater_than], greater_than_or_equal_to: validation.params[:greater_than_or_equal_to], equal_to: validation.params[:equal_to], less_than: validation.params[:less_than], less_than_or_equal_to: validation.params[:less_than_or_equal_to], other_than: validation.params[:other_than], odd: validation.params[:odd], even: validation.params[:even] }
+
+    - if validation.name == Anything::Managers::FormFieldValidation::VALIDATION_LENGTH
+      = render 'admin/anything/dynamic_form_components/validation_length_impl', params: { validation: validation.name, validation_id: validation_index, minimum: validation.params[:minimum], maximum: validation.params[:maximum], is:  validation.params[:is]}
+
+  %td
+    %span.checkbox.form-check
+      = check_box_tag 'form[fields][][validations][][options][allow_blank]', validation.options[:allow_blank], validation.options[:allow_blank], class: 'form-control string required allow-blank-checkbox', id: "form_fields_#{field_index}_validations_allow_blank_#{validation_index}"
+      %label.allow-blank-label{for: "form_fields_#{field_index}_validations_allow_blank_#{validation_index}"}
+
+  %td
+    = select_tag 'form[fields][][validations][][options][on]', options_for_select([["Create", "create"], ["Update", "update"]], validation.options[:on]), include_blank: true, class: 'form-control required', id: "form_fields_#{field_index}_validations_on_#{validation_index}"
+  %td
+    = delete_button '#', class: 'remove-anything-form-field-validation'

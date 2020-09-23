@@ -1,0 +1,10 @@
+.input.string
+  .form-group.form-float
+    - { |
+      :minumum => "Minimum", |
+      :maximum => "Maximum", |
+      :is => "Exactly", |
+    }.each do |name, label|
+      .form-line
+        %label{for: "form_fields_validation_#{name}_#{params[:validation_id]}"}= label
+        = text_field_tag :name, params[name], name: "form[fields][][validations][][params][#{name}]", class: 'form-control string', id: "form_fields_validation_#{name}_#{params[:validation_id]}"

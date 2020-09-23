@@ -1,0 +1,2 @@
+.form-line
+  = select_tag 'form[fields][][input]', options_for_select(Anything::Managers::Form.input_options(params[:field_type]), params[:input]), include_blank: Anything::Managers::Form.input_options(params[:field_type]).size > 1, class: 'form-control required'

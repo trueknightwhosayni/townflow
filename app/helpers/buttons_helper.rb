@@ -13,6 +13,10 @@ module ButtonsHelper
     link_to body.html_safe, url, { class: 'btn btn-info waves-effect' }.merge(options)
   end
 
+  def add_button(title, url, options={})
+    link_to "<i class='material-icons'>plus_one</i> #{title}".html_safe, url, { class: 'btn btn-info waves-effect' }.merge(options)
+  end
+
   def edit_button(url, options={})
     link_to "<i class='material-icons'>edit</i>".html_safe, url, options
   end

@@ -1,0 +1,12 @@
+- content_for :page_header do
+  %h2
+    Edit Entity
+    &nbsp;
+    = back_button form_back_path
+
+
+= render "admin/anything/shared/edit_collection_container", resource: resource do
+  = simple_form_for [:admin, resource] do |f|
+    = f.input :title
+
+    = submit_button 'Save'

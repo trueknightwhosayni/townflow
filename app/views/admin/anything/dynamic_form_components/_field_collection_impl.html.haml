@@ -1,0 +1,2 @@
+.form-line
+  = select_tag 'form[fields][][collection]', options_for_select(Anything::Managers::Form.collections_list_options, params[:collection]), include_blank: true, class: 'form-control string required'

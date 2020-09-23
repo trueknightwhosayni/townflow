@@ -1,4 +1,5 @@
 import './rails'
+import './jquery'
 import '../vendor/cocoon'
 
 import '../admin_bsb'

@@ -1,0 +1,22 @@
+.input.string
+  .form-group.form-float
+    - { |
+      :only_integer => "Only Integer", |
+      :odd => "Only Odds", |
+      :even => "Only Evens", |
+    }.each do |name, label|
+      .form-line
+        = check_box_tag "form[fields][][validations][][params][#{name}]", params[name], params[name], class: 'form-control string required', id: "form_fields_validation_#{name}_#{params[:validation_id]}"
+        %label{for: "form_fields_validation_#{name}_#{params[:validation_id]}"}= label
+
+    - { |
+      :greater_than => "Greater Than", |
+      :greater_than_or_equal_to => "Greater Than Or Equal To", |
+      :less_than => "Less Than", |
+      :less_than_or_equal_to => "Less Than Or Equal To", |
+      :other_than => "Other Than", |
+      :equal_to => "Exactly", |
+    }.each do |name, label|
+      .form-line
+        %label{for: "form_fields_validation_#{name}_#{params[:validation_id]}"}= label
+        = text_field_tag :name, params[name], name: "form[fields][][validations][][params][#{name}]", class: 'form-control string', id: "form_fields_validation_#{name}_#{params[:validation_id]}"

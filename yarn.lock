@@ -3211,6 +3211,11 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery.repeatable@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/jquery.repeatable/-/jquery.repeatable-0.4.1.tgz#28e6a53b8f4f9024c9bc21ad072a2117f63bd4f7"
+  integrity sha512-lIgpAre3tCgza5odwYhsq6YunqNsfTnw5zbsUXKCz33C4i1w5Myx1Fxy21hllfzja6yaYZpEsxj9LdLHz/BO1A==
+
 jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
@@ -4254,6 +4259,11 @@ pleeease-filters@^4.0.0:
   dependencies:
     onecolor "^3.0.4"
     postcss "^6.0.1"
+
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
 
 portfinder@^1.0.9:
   version "1.0.24"

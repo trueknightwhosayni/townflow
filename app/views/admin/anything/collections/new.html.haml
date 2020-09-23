@@ -1,0 +1,11 @@
+- content_for :page_header do
+  %h2
+    New Entity
+    &nbsp;
+    = back_button form_back_path
+
+= simple_form_for [:admin, resource] do |f|
+  = f.input :folder_id, as: :hidden, input_html: { value: params[:folder_id] }
+  = f.input :title
+
+  = submit_button 'Save'

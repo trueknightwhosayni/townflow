@@ -1,0 +1,19 @@
+var field = $("#<%= params[:field_id]%>")
+
+<% if params[:field_type].blank? %>
+  field.find(".field_input .field_input_placeholder").html("")
+  field.find(".field_collection .field_input_collection").html("")
+<% else %>
+  var input_component = "<%= j render 'field_input_impl' %>"
+
+  field.find(".field_input .field_input_placeholder").html(input_component)
+
+  <% if params[:field_type] == Anything::Managers::Form::FIELD_TYPE_RELATION %>
+    var collection_component = "<%= j render 'field_collection_impl' %>"
+
+    field.find(".field_collection .field_collection_placeholder").html(collection_component)
+  <% end %>
+<% end %>
+
+
+

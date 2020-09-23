@@ -1,0 +1,22 @@
+- content_for :page_header do
+  %h2
+    Edit Entity
+    &nbsp;
+    = back_button back_path
+
+= render "admin/anything/shared/edit_collection_container", resource: collection_record do
+  = admin_button 'New Form', new_admin_anything_collection_form_path(collection_record), icon: 'playlist_add'
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Title
+        %th Actions
+    %tbody.folders-list
+      - collection_record.forms.each do |form|
+        %tr
+          %td
+            %span= form.title
+          %td
+            = edit_button edit_admin_anything_collection_form(collection_record, form)
+            = delete_button admin_anything_collection_form(collection_record, form)

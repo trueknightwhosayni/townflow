@@ -1,0 +1,20 @@
+var validation = $("#<%= params[:validation_id]%>")
+var params_component = ""
+
+<% if params[:validation].blank? %>
+  validation.find(".validation_params_placeholder").html("")
+<% else %>
+  <% if params[:validation] == Anything::Managers::FormFieldValidation::VALIDATION_PRESENCE %>
+    params_component = "";
+  <% end %>
+
+  <% if params[:validation] == Anything::Managers::FormFieldValidation::VALIDATION_NUMERICALITY %>
+    params_component = "<%= j render 'validation_numericality_impl' %>"
+  <% end %>
+
+  <% if params[:validation] == Anything::Managers::FormFieldValidation::VALIDATION_LENGTH %>
+    params_component = "<%= j render 'validation_length_impl' %>"
+  <% end %>
+
+  validation.find(".validation_params_placeholder").html(params_component)
+<% end %>
