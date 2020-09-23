@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_221313) do
+ActiveRecord::Schema.define(version: 2020_09_21_052228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_09_28_221313) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "relation_label_field_id"
+    t.string "system_class_name"
     t.index ["user_id"], name: "index_at_collections_on_user_id"
   end
 
@@ -28,7 +30,6 @@ ActiveRecord::Schema.define(version: 2019_09_28_221313) do
     t.integer "collection_id", null: false
     t.string "title", null: false
     t.string "name", null: false
-    t.string "field_role", null: false
     t.string "field_data_type", null: false
     t.string "available_filters"
     t.integer "relation_collection_id"
@@ -55,6 +56,14 @@ ActiveRecord::Schema.define(version: 2019_09_28_221313) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "at_god_records", force: :cascade do |t|
+    t.integer "collection_id", null: false
+    t.jsonb "anything_data", default: "{}"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_at_god_records_on_collection_id"
+  end
+
   create_table "at_views", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.string "title", null: false
@@ -77,6 +86,36 @@ ActiveRecord::Schema.define(version: 2019_09_28_221313) do
     t.index ["group_id", "role_id"], name: "index_groups_roles_on_group_id_and_role_id"
     t.index ["group_id"], name: "index_groups_roles_on_group_id"
     t.index ["role_id"], name: "index_groups_roles_on_role_id"
+  end
+
+  create_table "neewom_fields", force: :cascade do |t|
+    t.integer "form_id", null: false
+    t.string "label"
+    t.string "name", null: false
+    t.string "input"
+    t.boolean "virtual"
+    t.string "validations"
+    t.string "collection_klass"
+    t.string "collection_method"
+    t.string "collection_params"
+    t.string "label_method"
+    t.string "value_method"
+    t.string "input_html"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id", "name"], name: "index_neewom_fields_on_form_id_and_name", unique: true
+  end
+
+  create_table "neewom_forms", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "description"
+    t.string "crc32", null: false
+    t.string "repository_klass", null: false
+    t.string "template", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crc32"], name: "index_neewom_forms_on_crc32", unique: true
+    t.index ["key"], name: "index_neewom_forms_on_key", unique: true
   end
 
   create_table "roles", force: :cascade do |t|

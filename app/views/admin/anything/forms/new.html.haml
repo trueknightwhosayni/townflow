@@ -1,0 +1,7 @@
+- content_for :page_header do
+  %h2
+    Add new form
+    &nbsp;
+    = back_button back_path
+
+= render 'form', form_object: @form_object

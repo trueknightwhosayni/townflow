@@ -1,0 +1,13 @@
+%ul.nav.nav-tabs.tab-nav-right
+  %li{class: active_pane("main", default: true)}
+    = link_to "Main", edit_admin_anything_collection_path(resource)
+  %li{class: active_pane("fields")}
+    = link_to "Fields", admin_anything_collection_fields_path(resource)
+  %li{class: active_pane("forms")}
+    = link_to "Forms", admin_anything_collection_forms_path(resource)
+  %li{class: active_pane("views")}
+    = link_to "Views", admin_anything_collection_views_path(resource)
+
+.tab-content
+  .tab-pane.active.in
+    = yield

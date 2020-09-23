@@ -9,8 +9,14 @@ Rails.application.routes.draw do
     resources :roles
 
     namespace :anything do
-      resources :collections
+      resources :collections do
+        resources :forms
+        resources :fields
+        resources :views
+      end
       resources :folders, only: [:new, :create, :edit, :update, :destroy]
+
+      resources :dynamic_form_components, only: [:index]
     end
   end
 

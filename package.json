@@ -8,6 +8,7 @@
     "@rails/webpacker": "3.5",
     "activestorage": "^5.2.3",
     "jquery": "^3.4.1",
+    "jquery.repeatable": "^0.4.1",
     "popper.js": "^1.16.1",
     "rails-ujs": "^5.2.3",
     "turbolinks": "^5.2.0"

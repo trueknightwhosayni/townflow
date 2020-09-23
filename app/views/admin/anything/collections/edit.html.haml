@@ -5,24 +5,8 @@
     = back_button form_back_path
 
 
-%ul.nav.nav-tabs.tab-nav-right{:role => "tablist"}
-  %li.active{:role => "presentation"}
-    %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#main"} Main
-  %li{:role => "presentation"}
-    %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#forms"} Forms
-  %li{:role => "presentation"}
-    %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#views"} Views
+= render "admin/anything/shared/edit_collection_container", resource: resource do
+  = simple_form_for [:admin, resource] do |f|
+    = f.input :title
 
-.tab-content
-  #main.tab-pane.active.in{:role => "tabpanel"}
-    = simple_form_for [:admin, resource] do |f|
-      = f.input :title
-
-      = submit_button 'Save'
-  #forms.tab-pane{:role => "tabpanel"}
-    %p Forms
-    %p Forms
-    %p Forms
-    %p Forms
-  #views.tab-pane{:role => "tabpanel"}
-    %b Views
+    = submit_button 'Save'

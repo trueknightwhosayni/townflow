@@ -1,0 +1,1 @@
+export const removeWithAnimation = (target) => target.hide('slow', function(){ target.remove(); });

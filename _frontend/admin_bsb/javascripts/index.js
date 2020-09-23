@@ -2,3 +2,4 @@
 import './plugins/node-waves/waves'
 import './admin'
 import './helpers'
+import './fixes_patches_overrides'
