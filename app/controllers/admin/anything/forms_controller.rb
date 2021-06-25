@@ -51,8 +51,12 @@ class Admin::Anything::FormsController < Admin::Anything::BaseController
   helper_method :back_path
 
   def permitted_params
-    params.require(:form).permit(:title, fields: [:name, :label, :field_type, :input, :collection, :virtual, :input_html,
+    params.require(:form).permit(:title, :collection_id, fields: [:name, :label, :field_type, :input, :collection, :virtual, :input_html,
     validations: [:name, :options => [:allow_blank, :on], :params => Anything::Managers::FormFieldValidation.all_possible_permitted_params]
     ])
+  end
+
+  def current_tab_pane
+    :forms
   end
 end

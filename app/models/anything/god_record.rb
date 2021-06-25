@@ -1,5 +1,8 @@
 class Anything::GodRecord < ApplicationRecord
   include Anything::ActAsRecord
+  include Neewom::Model
+
+  has_neewom_attributes :anything_data
 
   belongs_to :collection
 

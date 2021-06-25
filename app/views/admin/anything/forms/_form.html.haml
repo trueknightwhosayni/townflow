@@ -1,8 +1,8 @@
 - method = form_object.persisted? ? "PATCH" : "POST"
-- url = form_object.persisted? ? admin_anything_collection_form_path(form_object.record_id) : admin_anything_collection_forms_path
+- url = form_object.persisted? ? admin_anything_collection_form_path(collection_record, form_object.form_record) : admin_anything_collection_forms_path(collection_record)
 
 = form_with scope: :form, model: form_object, url: url, method: method do |f|
-  = hidden_field_tag :collection_id, params[:collection_id]
+  = f.hidden_field :collection_id, value: collection_record.id
 
   .input.string.anything_form_title
     .form-group.form-float

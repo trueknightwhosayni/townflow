@@ -12,4 +12,10 @@ class Anything::FormFieldValidationObject
   def params
     @params || {}
   end
+
+  def to_neewom_validation
+  end
+
+  def self.from_neewom_validation
+  end
 end

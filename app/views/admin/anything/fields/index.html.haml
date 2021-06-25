@@ -1,22 +1,22 @@
 - content_for :page_header do
   %h2
-    Edit Entity
+    Entity Fields
     &nbsp;
     = back_button back_path
 
-= render "admin/anything/shared/edit_collection_container", resource: resource do
-  = admin_button 'New Form', new_admin_anything_collection_form_path(resource), icon: 'playlist_add'
-
+= render "admin/anything/shared/edit_collection_container", resource: collection_record do
   %table.table.table-striped
     %thead
       %tr
         %th Title
-        %th Actions
+        %th Field Type
+        %th Sources
     %tbody.folders-list
-      - resource.forms.each do |form|
+      - collection_record.fields.each do |field|
         %tr
           %td
-            %span= form.title
+            %span= field.title
           %td
-            = edit_button edit_admin_anything_collection_form(resource, form)
-            = delete_button admin_anything_collection_form(resource, form)
+            = field.field_data_type
+          %td
+            = field.sources

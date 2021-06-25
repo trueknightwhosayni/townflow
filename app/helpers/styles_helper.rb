@@ -1,5 +1,5 @@
 module StylesHelper
   def active_pane(name, options={})
-    " active " if params[:active_pane] == name || (options[:default] && params[:active_pane].blank?)
+    " active " if current_tab_pane == name || (options[:default] && current_tab_pane.blank?)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_052228) do
+ActiveRecord::Schema.define(version: 2021_06_10_112157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_09_21_052228) do
 
   create_table "at_forms", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "neewom_form_id", null: false
     t.integer "collection_id", null: false
     t.boolean "system", default: false, null: false
     t.datetime "created_at", null: false
@@ -101,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_09_21_052228) do
     t.string "label_method"
     t.string "value_method"
     t.string "input_html"
+    t.string "custom_options"
+    t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["form_id", "name"], name: "index_neewom_fields_on_form_id_and_name", unique: true
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_052228) do
     t.string "crc32", null: false
     t.string "repository_klass", null: false
     t.string "template", null: false
+    t.boolean "persist_submit_controls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crc32"], name: "index_neewom_forms_on_crc32", unique: true

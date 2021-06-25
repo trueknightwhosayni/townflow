@@ -1,4 +1,4 @@
-class Admin::Anything::FoldersController < Admin::Anything::BaseCollectionsController
+class Admin::Anything::ViewsController < Admin::Anything::BaseCollectionsController
   resource_actions :new, :create, :edit, :update, :destroy
   resource_class 'Anything::Folder'
 
@@ -21,5 +21,9 @@ class Admin::Anything::FoldersController < Admin::Anything::BaseCollectionsContr
 
   def permitted_params
     params.require(:anything_folder).permit(:title, :parent_id)
+  end
+
+  def current_tab_pane
+    :views
   end
 end
