@@ -10,29 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_112157) do
+ActiveRecord::Schema.define(version: 2021_06_25_184034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "at_collections", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "folder_id"
+    t.bigint "folder_id"
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "relation_label_field_id"
+    t.bigint "relation_label_field_id"
     t.string "system_class_name"
     t.index ["user_id"], name: "index_at_collections_on_user_id"
   end
 
   create_table "at_fields", force: :cascade do |t|
-    t.integer "collection_id", null: false
+    t.bigint "collection_id", null: false
     t.string "title", null: false
     t.string "name", null: false
     t.string "field_data_type", null: false
-    t.string "available_filters"
-    t.integer "relation_collection_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,26 +47,78 @@ ActiveRecord::Schema.define(version: 2021_06_10_112157) do
 
   create_table "at_forms", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "collection_id", null: false
+    t.bigint "collection_id", null: false
     t.boolean "system", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "at_god_records", force: :cascade do |t|
-    t.integer "collection_id", null: false
+    t.bigint "collection_id", null: false
     t.jsonb "anything_data", default: "{}"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["collection_id"], name: "index_at_god_records_on_collection_id"
   end
 
+  create_table "at_view_fields", force: :cascade do |t|
+    t.bigint "at_view_id"
+    t.bigint "at_field_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["at_field_id"], name: "index_at_view_fields_on_at_field_id"
+    t.index ["at_view_id"], name: "index_at_view_fields_on_at_view_id"
+  end
+
   create_table "at_views", force: :cascade do |t|
-    t.integer "collection_id", null: false
+    t.bigint "collection_id", null: false
     t.string "title", null: false
     t.integer "view_type", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "erp_section_access", force: :cascade do |t|
+    t.bigint "section_id"
+    t.bigint "group_id"
+    t.bigint "role_id"
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_erp_section_access_on_group_id"
+    t.index ["role_id"], name: "index_erp_section_access_on_role_id"
+  end
+
+  create_table "erp_section_categories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "key", null: false
+    t.string "title", null: false
+    t.string "ancestry"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_erp_section_categories_on_ancestry"
+    t.index ["user_id"], name: "index_erp_section_categories_on_user_id"
+  end
+
+  create_table "erp_section_views", force: :cascade do |t|
+    t.bigint "section_id"
+    t.bigint "view_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "erp_sections", force: :cascade do |t|
+    t.bigint "section_category_id"
+    t.bigint "user_id"
+    t.string "key", null: false
+    t.string "title", null: false
+    t.string "icon"
+    t.string "new_item_processor_class", null: false
+    t.string "new_item_processor_attributes", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_erp_sections_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
