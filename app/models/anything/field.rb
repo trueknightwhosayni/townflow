@@ -2,6 +2,7 @@ class Anything::Field < ApplicationRecord
   belongs_to :collection
 
   validates :name, :title, :field_data_type, presence: true
+  validates :field_data_type, inclusion: { in: Anything::Managers::Form::FIELD_TYPES }
 
   def sources
     collection

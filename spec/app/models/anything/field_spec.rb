@@ -6,6 +6,9 @@ RSpec.describe Anything::Field, type: :model do
   it { should validate_presence_of :name }
   it { should validate_presence_of :title }
   it { should validate_presence_of :field_data_type }
+  it { should validate_inclusion_of(:field_data_type).in_array(%w(integer float text bool file datetime relation)) }
+
+  it { expect(create(:anything_field)).to be_present }
 
   describe '#sources' do
     before do

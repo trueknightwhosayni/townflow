@@ -4,6 +4,6 @@ class Erp::SectionCategory < ApplicationRecord
   belongs_to :user
   has_many :sections
 
-  validates :key, :title, :new_item_processor_class, :new_item_processor_attributes, presence: true
-  validates :key, uniquness: true
+  validates :key, :title, presence: true
+  validates :key, uniqueness: true
 end

@@ -62,12 +62,12 @@ ActiveRecord::Schema.define(version: 2021_06_25_184034) do
   end
 
   create_table "at_view_fields", force: :cascade do |t|
-    t.bigint "at_view_id"
-    t.bigint "at_field_id"
+    t.bigint "view_id"
+    t.bigint "field_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["at_field_id"], name: "index_at_view_fields_on_at_field_id"
-    t.index ["at_view_id"], name: "index_at_view_fields_on_at_view_id"
+    t.index ["field_id"], name: "index_at_view_fields_on_field_id"
+    t.index ["view_id"], name: "index_at_view_fields_on_view_id"
   end
 
   create_table "at_views", force: :cascade do |t|
@@ -78,15 +78,15 @@ ActiveRecord::Schema.define(version: 2021_06_25_184034) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "erp_section_access", force: :cascade do |t|
+  create_table "erp_section_accesses", force: :cascade do |t|
     t.bigint "section_id"
     t.bigint "group_id"
     t.bigint "role_id"
     t.string "action", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_erp_section_access_on_group_id"
-    t.index ["role_id"], name: "index_erp_section_access_on_role_id"
+    t.index ["group_id"], name: "index_erp_section_accesses_on_group_id"
+    t.index ["role_id"], name: "index_erp_section_accesses_on_role_id"
   end
 
   create_table "erp_section_categories", force: :cascade do |t|

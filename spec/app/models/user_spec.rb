@@ -5,6 +5,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:owner_groups).class_name('Group') }
   it { should have_and_belong_to_many(:groups) }
 
+  it { expect(create(:user)).to be_present }
+
   describe "#respond_to_role?" do
     let(:user_1) { create :user }
     let(:user_2) { create :user }

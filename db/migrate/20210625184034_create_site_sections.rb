@@ -31,7 +31,7 @@ class CreateSiteSections < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :erp_section_access do |t|
+    create_table :erp_section_accesses do |t|
       t.bigint :section_id
       t.references :group
       t.references :role

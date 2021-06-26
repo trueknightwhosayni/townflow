@@ -1,9 +1,7 @@
 class Erp::SectionAccess < ApplicationRecord
-  self.table_name = 'section_access'
-
   belongs_to :section
-  belongs_to :group
-  belongs_to :role
+  belongs_to :group, optional: true
+  belongs_to :role, optional: true
 
   validates :action, presence: true
 end

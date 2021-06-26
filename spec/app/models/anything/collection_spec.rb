@@ -11,6 +11,8 @@ RSpec.describe Anything::Collection, type: :model do
 
   it { should validate_presence_of :title }
 
+  it { expect(create(:anything_collection)).to be_present }
+
   describe 'self.roots' do
     let!(:folder) { create :anything_folder }
     let!(:collection_1) { create :anything_collection, folder: folder }

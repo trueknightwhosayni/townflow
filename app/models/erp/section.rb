@@ -7,6 +7,6 @@ class Erp::Section < ApplicationRecord
   has_many :views, source: :view
   has_many :section_access, class_name: "Erp::SectionAccess"
 
-  validates :key, :title, presence: true
-  validates :key, uniquness: true
+  validates :key, :title, :new_item_processor_class, :new_item_processor_attributes, presence: true
+  validates :key, uniqueness: true
 end
