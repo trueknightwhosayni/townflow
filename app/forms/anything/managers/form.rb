@@ -34,7 +34,7 @@ class Anything::Managers::Form
     @collections_list_options ||=
       Anything::Collection.all.map do |collection|
         if collection.system_class_name.blank?
-          [collection.title, "GodRecord|#{collection.id}"]
+          [collection.title, "Anything::Collection|#{collection.id}"]
         else
           [collection.title, collection.system_class_name]
         end

@@ -66,7 +66,7 @@ RSpec.describe Anything::Managers::Form do
 
     it do
       is_expected.to eq([
-        [collection_1.title, "GodRecord|#{collection_1.id}"],
+        [collection_1.title, "Anything::Collection|#{collection_1.id}"],
         [collection_2.title, "User"]
       ])
     end

@@ -17,8 +17,8 @@ RSpec.describe Anything::Managers::FormFieldValidation do
     subject { described_class.all_possible_permitted_params }
 
     it do
-      is_expected.to eq(
-        %i[with minimum maximum is only_integer greater_than greater_than_or_equal_to equal_to less_than
+      is_expected.to match_array(
+        %i[minimum maximum is only_integer greater_than greater_than_or_equal_to equal_to less_than
           less_than_or_equal_to other_than odd even]
       )
     end

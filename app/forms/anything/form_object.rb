@@ -34,7 +34,7 @@ class Anything::FormObject
   end
 
   def fields=(value)
-    @fields = Array(value).map { |raw| Anything::FormFieldObject.new(raw) }
+    @fields = Array.wrap(value).map { |raw| Anything::FormFieldObject.new(raw) }
   end
 
   def raw_fields=(fields)
@@ -91,6 +91,9 @@ class Anything::FormObject
   end
 
   def ensure_all_fields_valid
-    @fields && @fields.map(&:valid?).all?
+    return if @fields.blank?
+    return if @fields.map(&:valid?).all?
+
+    errors.add :validations, "Fields invalid"
   end
 end

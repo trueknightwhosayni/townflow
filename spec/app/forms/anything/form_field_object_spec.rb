@@ -9,10 +9,10 @@ RSpec.describe Anything::FormFieldObject, type: :model do
       label: 'field_label',
       field_type: 'integer',
       input: 'text_area',
-      collection: 'GodRecord|1',
+      collection: 'Anything::Collection|1',
       virtual: true,
       input_html: { class: 'ccs-class-name' },
-      validations: { name: 'presence', params: { presence: true }, options: { on: :create } }
+      validations: { name: 'presence', params: {}, options: { on: :create } }
     }
   end
 
@@ -22,14 +22,14 @@ RSpec.describe Anything::FormFieldObject, type: :model do
       expect(subject.label).to eq('field_label')
       expect(subject.field_type).to eq('integer')
       expect(subject.input).to eq('text_area')
-      expect(subject.collection).to eq('GodRecord|1')
+      expect(subject.collection).to eq('Anything::Collection|1')
       expect(subject.virtual).to eq(true)
       expect(subject.input_html).to eq({ class: 'ccs-class-name' })
 
       validation = subject.validations.first
 
       expect(validation.name).to eq('presence')
-      expect(validation.params).to eq({ presence: true })
+      expect(validation.params).to eq({})
       expect(validation.options).to eq({ on: :create })
     end
   end
@@ -50,6 +50,23 @@ RSpec.describe Anything::FormFieldObject, type: :model do
     describe 'collection presence' do
       subject { described_class.new(field_type: Anything::Managers::Form::FIELD_TYPE_RELATION) }
       it { should validate_presence_of(:collection) }
+    end
+
+    describe 'validations are invalid' do
+      let(:attributes) do
+        {
+          name: 'field_name',
+          label: 'field_label',
+          field_type: 'integer',
+          input: 'text_area',
+          collection: 'Anything::Collection|1',
+          virtual: true,
+          input_html: { class: 'ccs-class-name' },
+          validations: { name: 'length', params: nil, options: { on: :create } }
+        }
+      end
+
+      it { is_expected.to_not be_valid }
     end
   end
 
@@ -117,7 +134,7 @@ RSpec.describe Anything::FormFieldObject, type: :model do
           custom_options: { field_type: 'relation' },
           collection_klass: Anything::Managers::Relation,
           collection_method: :build_relation,
-          collection_params: ["neewom|value|\"GodRecord|1\""]
+          collection_params: ["neewom|value|\"Anything::Collection|1\""]
         })
       end
     end
@@ -162,11 +179,11 @@ RSpec.describe Anything::FormFieldObject, type: :model do
       validation_1, validation_2 = object.validations
 
       expect(validation_1.name).to eq('presence')
-      expect(validation_1.params).to eq({ presence: true })
+      expect(validation_1.params).to eq({})
       expect(validation_1.options).to eq({ on: 'update' })
 
       expect(validation_2.name).to eq('length')
-      expect(validation_2.params).to eq(length: { minimum: 10 })
+      expect(validation_2.params).to eq({ minimum: 10 })
       expect(validation_2.options).to eq({})
     end
   end

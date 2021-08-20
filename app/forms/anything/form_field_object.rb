@@ -8,8 +8,11 @@ class Anything::FormFieldObject
   validates :field_type, inclusion: { in: Anything::Managers::Form::FIELD_TYPES }
   validates :input, inclusion: { in: Anything::Managers::Form::FIELD_INPUTS }
   validates :collection, presence: true, if: -> { field_type == Anything::Managers::Form::FIELD_TYPE_RELATION }
+  validate :ensure_all_validations_valid
 
   def save!(collection_id)
+    raise ActiveRecord::RecordInvalid unless valid?
+
     Anything::Field
       .where(collection_id: collection_id, name: name)
       .first_or_initialize
@@ -79,5 +82,14 @@ class Anything::FormFieldObject
         field_type: field_type,
       }.merge(collection_config)
     )
+  end
+
+  private
+
+  def ensure_all_validations_valid
+    return if @validations.blank?
+    return if @validations.map(&:valid?).all?
+
+    errors.add :validations, "Validations invalid"
   end
 end
