@@ -1,0 +1,7 @@
+- content_for :page_header do
+  %h2
+    Edit view
+    &nbsp;
+    = back_button back_path
+
+= render 'form', resource: resource

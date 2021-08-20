@@ -82,7 +82,6 @@ gem "simple_form"
 gem "hamlit"
 gem "kaminari"
 
-gem "sidekiq"
 gem "email_validator"
 gem "ancestry"
 gem "simple_resource_controller"

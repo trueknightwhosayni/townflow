@@ -5,9 +5,11 @@ class Anything::View < ApplicationRecord
   }
 
   belongs_to :collection
-  has_many :view_fields
+  has_many :view_fields, inverse_of: :view
   has_many :fields, through: :view_fields
 
   validates :title, :view_type, presence: true
   validates :view_type, inclusion: { in: TYPES.keys }
+
+  accepts_nested_attributes_for :view_fields, reject_if: :all_blank, allow_destroy: true
 end

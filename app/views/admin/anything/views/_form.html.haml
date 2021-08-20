@@ -1,0 +1,15 @@
+- method = resource.persisted? ? "PATCH" : "POST"
+- url = resource.persisted? ? admin_anything_collection_view_path(collection_record, resource) : admin_anything_collection_views_path(collection_record)
+
+= simple_form_for resource, url: url, method: method do |f|
+  = f.input :title
+  = f.input :view_type, collection: Anything::View::TYPES.invert
+  %h3 Fields
+  #view-fields
+    = f.simple_fields_for :view_fields do |view_field|
+      = render 'view_field_fields', f: view_field
+    .links
+      = link_to_add_association 'add field', f, :view_fields
+
+  %hr
+  = submit_button 'Save'

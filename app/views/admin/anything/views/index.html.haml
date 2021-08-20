@@ -4,19 +4,26 @@
     &nbsp;
     = back_button back_path
 
-= render "admin/anything/shared/edit_collection_container", resource: resource do
-  = admin_button 'New Form', new_admin_anything_collection_form_path(resource), icon: 'playlist_add'
+= render "admin/anything/shared/edit_collection_container", resource: collection_record do
+  = admin_button 'New View', new_admin_anything_collection_view_path(collection_record), icon: 'playlist_add'
 
   %table.table.table-striped
     %thead
       %tr
         %th Title
+        %th Type
+        %th Fields
         %th Actions
     %tbody.folders-list
-      - resource.forms.each do |form|
+      - collection_record.views.each do |view|
         %tr
           %td
-            %span= form.title
+            %span= view.title
           %td
-            = edit_button edit_admin_anything_collection_form(resource, form)
-            = delete_button admin_anything_collection_form(resource, form)
+            %span= Anything::View::TYPES[view.view_type]
+          %td
+            - view.fields.each do |field|
+              %span= field.title
+          %td
+            = edit_button edit_admin_anything_collection_view_path(collection_record, view)
+            = delete_button admin_anything_collection_view_path(collection_record, view)
