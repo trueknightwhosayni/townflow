@@ -84,6 +84,13 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
+  config.wrappers(:checkbox, :tag => 'div', :class => 'form-group form-float') do |ba|
+    ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
+    ba.use :label, :class => 'form-label'
+    ba.use :error, :wrap_with => { :tag => 'label', :class => 'error' }
+    ba.use :hint,  :wrap_with => { :tag => 'label', :class => '' }
+  end
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default
 

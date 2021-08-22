@@ -18,7 +18,15 @@ Rails.application.routes.draw do
 
       resources :dynamic_form_components, only: [:index]
     end
+
+    namespace :erp do
+      resources :section_categories
+      resources :sections, only: [:new, :create, :edit, :update, :destroy]
+      resources :dynamic_form_components, only: [:index]
+    end
   end
+
+  resources :at_records
 
   root to: 'dashboard#index'
 end

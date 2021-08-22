@@ -1,0 +1,5 @@
+- content_for :page_header do
+  %h2
+    = @runner.title
+
+= render 'form', runner: @runner

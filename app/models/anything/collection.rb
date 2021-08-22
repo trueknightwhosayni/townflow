@@ -6,6 +6,7 @@ class Anything::Collection < ApplicationRecord
   has_many :forms
   has_many :fields
   has_many :views
+  has_many :god_records
   has_one :relation_label_field, class_name: 'Anything::Field'
 
   validates :title, presence: true

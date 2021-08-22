@@ -1,0 +1,7 @@
+= simple_form_for [:admin, resource] do |f|
+  = f.input :parent_id, as: :hidden, input_html: { value: current_category&.parent_id || params[:category_id] }
+  = f.input :key
+  = f.input :title
+  = f.input :icon
+
+  = submit_button 'Save'

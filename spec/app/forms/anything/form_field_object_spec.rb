@@ -138,6 +138,30 @@ RSpec.describe Anything::FormFieldObject, type: :model do
         })
       end
     end
+
+    context 'when empty input_html' do
+      let(:object) { described_class.new(attributes.merge(input_html: '')) }
+      let(:result) { object.to_neewom_field }
+
+      it 'converts blank input html to empty hash' do
+        name, config = result
+
+        expect(name).to eq('field_name')
+        expect(config[:input_html]).to eq({})
+      end
+    end
+
+    context 'when need to process validation options' do
+      let(:object) { described_class.new(attributes.merge(validations: [{length: { minimum: '3' }, on: ''}])) }
+      let(:result) { object.to_neewom_field }
+
+      it 'converts blank input html to empty hash' do
+        name, config = result
+
+        expect(name).to eq('field_name')
+        expect(config[:validations]).to eq([{length: { minimum: 3 }}])
+      end
+    end
   end
 
   describe 'self.from_neewom_field' do

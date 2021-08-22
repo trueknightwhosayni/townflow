@@ -1,0 +1,7 @@
+<% if params[:value].blank? %>
+  $("#collection-dependent-settings-container").html("")
+<% else %>
+  var input_component = "<%= j render 'section_form_collection_impl' %>"
+
+  $("#collection-dependent-settings-container").html(input_component)
+<% end %>

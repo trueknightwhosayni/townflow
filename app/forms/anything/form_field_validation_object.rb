@@ -18,9 +18,10 @@ class Anything::FormFieldValidationObject
   end
 
   def to_neewom_validation
-    sanitized_params = (params.presence || {}).reject { |_, v| v.blank? }
+    sanitized_params = (params.presence || {}).reject { |_, v| v.blank? }.transform_values { |v| v.is_i? ? v.to_i : v }
+    sanitized_options = (options.presence || {}).reject { |_, v| v.blank? }
 
-    { name.to_sym => sanitized_params.presence || true }.merge(options)
+    { name.to_sym => sanitized_params.presence || true }.merge(sanitized_options)
   end
 
   def self.from_neewom_validation(neewom_validations)

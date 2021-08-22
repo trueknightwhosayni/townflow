@@ -52,7 +52,7 @@ class Anything::FormFieldObject
         virtual: virtual,
         label: label,
         input: input,
-        input_html: input_html,
+        input_html: input_html.presence || {},
         validations: validations.map { |v| v.to_neewom_validation },
         custom_options: { field_type: field_type },
       }.merge(collection_config)
@@ -77,7 +77,7 @@ class Anything::FormFieldObject
         virtual: field.virtual,
         label: field.label,
         input: field.input,
-        input_html: field.input_html,
+        input_html: field.input_html.presence || '',
         raw_validations: field.validations.map { |v| Anything::FormFieldValidationObject.from_neewom_validation(v) },
         field_type: field_type,
       }.merge(collection_config)

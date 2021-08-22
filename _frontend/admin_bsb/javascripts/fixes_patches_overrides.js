@@ -5,4 +5,13 @@ $(document).ready(function(){
     $(this).parent('li').parent('ul').find('li.active').removeClass('active')
     $(this).parent('li').addClass('active')
   })
+
+  $('body').on('focusin', '.form-control', function(e) {
+    $(this).closest('.form-line').addClass('focused')
+  })
+
+  $('body').on('focusout', '.form-control', function(e) {
+    if (!$(this).val())
+      $(this).closest('.form-line').removeClass('focused')
+  })
 })

@@ -1,0 +1,63 @@
+.input.select
+  .form-group.form-float
+    .form-line
+      = select_tag 'erp_section[list_renderer_attributes][view_id]', |
+        options_for_select(Anything::Managers::Form.list_views_options(params[:value]), params[:list_renderer_attributes_view_id]), |
+        id: "erp_section_list_renderer_attributes", |
+        class: 'form-control select', |
+        include_blank: true
+      %label.form-label.select.required{for: "erp_section_list_renderer_attributes"}
+        %abbr{title: "required"}
+          *
+        List View
+    - if params[:list_renderer_attributes_errors].present?
+      - params[:list_renderer_attributes_errors].each do |message|
+        %label.error= message
+
+.input.select
+  .form-group.form-float
+    .form-line
+      = select_tag 'erp_section[document_renderer_attributes][view_id]', |
+        options_for_select(Anything::Managers::Form.document_views_options(params[:value]), params[:document_renderer_attributes_view_id]), |
+        id: "erp_section_document_renderer_attributes", |
+        class: 'form-control select', |
+        include_blank: true
+      %label.form-label.select.required{for: "erp_section_document_renderer_attributes"}
+        %abbr{title: "required"}
+          *
+        Document View
+    - if params[:document_renderer_attributes_errors].present?
+      - params[:document_renderer_attributes_errors].each do |message|
+        %label.error= message
+
+%script#collection-id{ data: { id: params[:value] } }
+.input.select
+  .form-group.form-float#new_item_processor_class
+    .form-line
+      = select_tag 'erp_section[new_item_processor_class]', |
+        options_for_select(Erp::Managers::NewEntity.available_processors, params[:new_item_processor_class]), |
+        id: "erp_section_new_item_processor_class", |
+        include_blank: true, |
+        class: 'form-control select', |
+        data: { url: admin_erp_dynamic_form_components_path, element: 'section_form_processor_class' }
+      %label.form-label.select.required{for: "erp_section_new_item_processor_class"}
+        %abbr{title: "required"}
+          *
+        Initiate New Item with
+    - if params[:new_item_processor_class_errors].present?
+      - params[:new_item_processor_class_errors].each do |message|
+        %label.error= message
+
+:javascript
+  customDynamicElement("#erp_section_new_item_processor_class", function(e) {
+    return { collection_id: $('#collection-id').data('id') }
+  })
+
+#new_item_processor_attributes-container
+  - if params[:new_item_processor_attributes].present?
+    - p = { value: params[:new_item_processor_class], |
+            errors: params[:new_item_processor_attributes_errors], |
+            collection_id: params[:value], |
+            form_id: params[:new_item_processor_attributes][:form_id], |
+            process_id: params[:new_item_processor_attributes][:process_id] }
+    = render 'admin/erp/dynamic_form_components/section_form_processor_class_impl', params: p

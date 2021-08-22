@@ -28,7 +28,7 @@
   <div class="row">
       <div class="col-xs-8 p-t-5">
           <% if devise_mapping.rememberable? %>
-            <%= f.input :remember_me, as: :boolean, input_html: { id: "rememberme", class: "filled-in chk-col-pink"}, label: false, wrapper: false  %>
+            <%= f.input :remember_me, as: :boolean, input_html: { id: "rememberme", class: "filled-in chk-col-pink"}, label: false, wrapper: :checkbox  %>
             <label for="rememberme">Remember Me</label>
           <% end %>
       </div>

@@ -1,0 +1,10 @@
+%li
+  %a.menu-toggle{:href => "javascript:void(0);"}
+    - if category.icon.present?
+      %i.material-icons= category.icon
+    %span= category.title
+  %ul.ml-menu
+    - category.children.each do |c|
+      = render 'layouts/partials/application/sidebar_category_item', category: c
+    - category.sections.each do |s|
+      = render 'layouts/partials/application/sidebar_section_item', section: s

@@ -1,0 +1,5 @@
+%li
+  = link_to at_records_path(section_id: section.id) do
+    - if section.icon.present?
+      %i.material-icons view_headline
+    %span= section.title

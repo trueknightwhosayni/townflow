@@ -4,6 +4,9 @@ class Anything::View < ApplicationRecord
     (DOCUMENT_TYPE = 2) => 'document'
   }
 
+  scope :document, -> { where(view_type: DOCUMENT_TYPE) }
+  scope :list, -> { where(view_type: LIST_TYPE) }
+
   belongs_to :collection
   has_many :view_fields, inverse_of: :view
   has_many :fields, through: :view_fields

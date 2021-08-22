@@ -1,0 +1,27 @@
+- content_for :page_header do
+  %h2
+    = @renderer.title
+
+= add_button 'New Entity', new_at_record_path(section_id: section.id)
+
+%table.table.table-striped
+  %thead
+    %tr
+      - @renderer.fields.each do |field|
+        %th= field.title
+      - if section.allow_editing? || section.allow_deleting?
+        %th Actions
+  %tbody
+    - @renderer.records.each do |record|
+      - record.neewom_view(@renderer.fields.map(&:name))
+      %tr
+        - @renderer.fields.each do |field|
+          %td= record.public_send field.name
+        - if section.allow_editing? || section.allow_deleting?
+          %td
+            - if section.allow_editing?
+              = edit_button edit_at_record_path(record, section_id: section.id)
+            - if section.allow_deleting?
+              = delete_button at_record_path(record, section_id: section.id)
+
+= paginate @renderer.records

@@ -1,0 +1,27 @@
+= simple_form_for [:admin, resource] do |f|
+  = f.input :section_category_id, as: :hidden, input_html: { value: resource.section_category_id || params[:category_id] }
+  = f.input :key
+  = f.input :title
+  = f.input :icon
+  = f.input :allow_editing, wrapper: :checkbox
+  = f.input :allow_deleting, wrapper: :checkbox
+  = f.input :anything_collection_id, collection: Anything::Managers::Form.collections_list_options, |
+    input_html: { class: 'dynamicElement', |
+                  data: { url: admin_erp_dynamic_form_components_path, element: 'section_form_collection' }}
+
+  #collection-dependent-settings-container
+    - if resource.anything_collection_id.present?
+      - p = { |
+        value: resource.anything_collection_id, |
+        new_item_processor_class: resource.new_item_processor_class, |
+        new_item_processor_attributes: resource.new_item_processor_attributes.presence && JSON.parse(resource.new_item_processor_attributes, symbolize_names: true), |
+        list_renderer_attributes_view_id: resource.list_renderer_attributes.presence && JSON.parse(resource.list_renderer_attributes)['view_id'], |
+        document_renderer_attributes_view_id: resource.document_renderer_attributes.presence && JSON.parse(resource.document_renderer_attributes)['view_id'], |
+        new_item_processor_class_errors: resource.errors[:new_item_processor_class], |
+        new_item_processor_attributes_errors: resource.errors[:new_item_processor_attributes], |
+        list_renderer_attributes_errors: resource.errors[:list_renderer_attributes], |
+        document_renderer_attributes_errors: resource.errors[:document_renderer_attributes], |
+        }
+      = render 'admin/erp/dynamic_form_components/section_form_collection_impl', params: p
+
+  = submit_button 'Save'

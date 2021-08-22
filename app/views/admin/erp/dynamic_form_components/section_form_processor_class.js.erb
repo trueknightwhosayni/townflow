@@ -1,0 +1,7 @@
+<% if params[:value].blank? %>
+  $("#new_item_processor_attributes-container").html("")
+<% else %>
+  var input_component = "<%= j render 'section_form_processor_class_impl' %>"
+
+  $("#new_item_processor_attributes-container").html(input_component)
+<% end %>

@@ -32,12 +32,24 @@ class Anything::Managers::Form
 
   def self.collections_list_options
     @collections_list_options ||=
-      Anything::Collection.all.map do |collection|
-        if collection.system_class_name.blank?
-          [collection.title, "Anything::Collection|#{collection.id}"]
-        else
-          [collection.title, collection.system_class_name]
-        end
-      end
+      Anything::Collection.all.map { |collection| [collection.title, collection.id] }
+  end
+
+  def self.list_views_options(collection_id)
+    collection = Anything::Collection.find(collection_id)
+
+    collection.views.list.map { |view| [view.title, view.id] }
+  end
+
+  def self.document_views_options(collection_id)
+    collection = Anything::Collection.find(collection_id)
+
+    collection.views.document.map { |view| [view.title, view.id] }
+  end
+
+  def self.forms_options(collection_id)
+    collection = Anything::Collection.find(collection_id)
+
+    collection.forms.map { |form| [form.title, form.id] }
   end
 end

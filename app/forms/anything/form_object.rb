@@ -11,7 +11,7 @@ class Anything::FormObject
   def self.find(id)
     form_record = Anything::Form.find(id)
 
-    form = Neewom::CustomForm.find_by!(key: form_key(form_record.id)).to_form
+    form = form_record.to_neewom_form
 
     fields = form.fields
       .reject { |field| field.name.to_sym == :commit }
@@ -23,10 +23,6 @@ class Anything::FormObject
       collection_id: form_record.collection_id,
       raw_fields: fields
     )
-  end
-
-  def self.form_key(id)
-    "anything_form_#{id}"
   end
 
   def fields
@@ -53,7 +49,7 @@ class Anything::FormObject
     form_fields = [[:commit, { label: 'Save', input: 'submit' }]] + fields.map(&:to_neewom_field)
 
     form = Neewom::AbstractForm.build(
-      id: self.class.form_key(@form_record.id),
+      id: @form_record.form_key,
       repository_klass: repository_klass,
       fields: form_fields.to_h
     )
@@ -65,12 +61,7 @@ class Anything::FormObject
   end
 
   def destroy
-    # TODO: put this logic inside gem
-    neewom_form_record = Neewom::CustomForm.find_by!(key: self.class.form_key(@form_record.id))
-    neewom_form_record.custom_fields.each(&:destroy)
-    neewom_form_record.destroy
-
-    @form_record.destroy
+    @form_record.destroy_with_dependencies
 
     true
   end
@@ -82,8 +73,7 @@ class Anything::FormObject
 
     existing_names =
       collection_record.forms
-        .pluck(:id)
-        .map { |id| Neewom::CustomForm.find_by!(key: Anything::FormObject.form_key(id)).to_form }
+        .map(&:to_neewom_form)
         .map { |neewom_form| neewom_form.fields.map(&:name) }
         .flatten
 

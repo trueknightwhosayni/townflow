@@ -1,0 +1,26 @@
+.input.select
+  .form-group.form-float
+    .form-line
+      - if params[:value] == Erp::Runners::Form.name
+        = select_tag 'erp_section[new_item_processor_attributes][form_id]', |
+            options_for_select(Anything::Managers::Form.forms_options(params[:collection_id]), params[:form_id]), |
+            include_blank: true, |
+            id: "erp_section_new_item_processor_attributes", |
+            class: 'form-control select'
+        %label.form-label.select.required{for: "erp_section_new_item_processor_attributes"}
+          %abbr{title: "required"}
+            *
+          Form
+      - if params[:value] == Erp::Runners::Process.name
+        = select_tag 'erp_section[new_item_processor_attributes][process_id]', |
+            options_for_select(Bp::Managers::Process.process_options, params[:process_id]), |
+            include_blank: true, |
+            id: "erp_section_new_item_processor_attributes", |
+            class: 'form-control select'
+        %label.form-label.select.required{for: "erp_section_new_item_processor_attributes"}
+          %abbr{title: "required"}
+            *
+          Process
+    - if params[:errors].present?
+      - params[:errors].each do |message|
+        %label.error= message

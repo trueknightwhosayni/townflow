@@ -1,0 +1,33 @@
+- content_for :page_header do
+  %h2
+    ERP Navigation
+    &nbsp;
+    = back_button back_path
+
+= admin_button 'New Category', new_admin_erp_section_category_path(category_id: params[:category_id]), icon: 'create_new_folder'
+- if current_category.present?
+  = admin_button 'New Section', new_admin_erp_section_path(category_id: params[:category_id]), icon: 'device_hub'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Title
+      %th Actions
+  %tbody.folders-list
+    - collection.each do |category|
+      %tr
+        %td.folders-row
+          %i.material-icons folder
+          = link_to category.title, admin_erp_section_categories_path(category_id: category.id)
+        %td
+          = edit_button edit_admin_erp_section_category_path(category)
+          = delete_button admin_erp_section_category_path(category)
+
+    - @sections.each do |section|
+      %tr
+        %td.collections-row
+          %i.material-icons device_hub
+          = link_to section.title, edit_admin_erp_section_path(section)
+        %td
+          = edit_button edit_admin_erp_section_path(section)
+          = delete_button admin_erp_section_path(section)

@@ -6,7 +6,7 @@ module ButtonsHelper
     link_to body.html_safe, url, { class: 'btn btn-danger waves-effect' }.merge(options)
   end
 
-  def app_button()
+  def app_button(title, url, options={})
     icon = options.delete(:icon)
     body = icon ? "<i class='material-icons'>#{icon}</i><span>#{title}</span>" : "<span>#{title}</span>"
 

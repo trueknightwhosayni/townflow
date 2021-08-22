@@ -34,6 +34,9 @@
                     <% end %>
                 </li>
             <% end %>
+            <% Erp::SectionCategory.roots.each do |category| %>
+              <%= render 'layouts/partials/application/sidebar_category_item', category: category %>
+            <% end %>
         </ul>
     </div>
     <!-- #Menu -->

@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 2021_06_25_184034) do
   end
 
   create_table "erp_section_categories", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "key", null: false
     t.string "title", null: false
     t.string "ancestry"
@@ -98,27 +97,24 @@ ActiveRecord::Schema.define(version: 2021_06_25_184034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ancestry"], name: "index_erp_section_categories_on_ancestry"
-    t.index ["user_id"], name: "index_erp_section_categories_on_user_id"
-  end
-
-  create_table "erp_section_views", force: :cascade do |t|
-    t.bigint "section_id"
-    t.bigint "view_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "erp_sections", force: :cascade do |t|
     t.bigint "section_category_id"
-    t.bigint "user_id"
+    t.bigint "anything_collection_id"
+    t.string "list_renderer_class", null: false
+    t.string "list_renderer_attributes", null: false
+    t.string "document_renderer_class", null: false
+    t.string "document_renderer_attributes", null: false
+    t.string "new_item_processor_class", null: false
+    t.string "new_item_processor_attributes", null: false
+    t.boolean "allow_editing", default: false
+    t.boolean "allow_deleting", default: false
     t.string "key", null: false
     t.string "title", null: false
     t.string "icon"
-    t.string "new_item_processor_class", null: false
-    t.string "new_item_processor_attributes", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_erp_sections_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
